@@ -9,14 +9,14 @@ const getCards = (req, res) => {
 
 const createCard = (req, res) => {
   cards.create({ ...req.body, owner: req.user._id })
-    .then((card) => res.status(201).send(card))
+    .then((card) => res.send(card))
     .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 const deleteCard = (req, res) => {
   cards.findByIdAndDelete(req.params.cardId)
-    .then((card) => (card ? res.status(202).send({ message: 'Card Deleted' }) : res.status(404).send({ message: 'Not Found' })))
-    .catch((err) => res.status(404).send({ error: err.message }));
+    .then((card) => (card ? res.send({ message: 'Card Deleted' }) : res.status(404).send({ message: 'Not Found' })))
+    .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 const likeCard = (req, res) => {

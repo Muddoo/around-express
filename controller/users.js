@@ -14,21 +14,21 @@ const getUser = (req, res) => {
 
 const createUser = (req, res) => {
   users.create(req.body)
-    .then((user) => res.status(202).send(user))
+    .then((user) => res.send(user))
     .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 const updateUser = (req, res) => {
   const { name, about } = req.body;
   users.findByIdAndUpdate(req.user._id, { name, about }, { new: true, runValidators: true })
-    .then((user) => res.status(202).send(user))
+    .then((user) => res.send(user))
     .catch((err) => res.status(400).send({ error: err.message }));
 };
 
 const updateAvatar = (req, res) => {
   const { avatar } = req.body;
   users.findByIdAndUpdate(req.user._id, { avatar }, { new: true, runValidators: true })
-    .then((user) => res.status(202).send(user))
+    .then((user) => res.send(user))
     .catch((err) => res.status(400).send({ error: err.message }));
 };
 
